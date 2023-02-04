@@ -1,10 +1,22 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
 import bannerImage from '../public/images/road.jpg'
+import Link from "next/link";
 
-const inter = Inter({ subsets: ['latin'] })
+const links = [
+  {
+    url: '/moving',
+    text: 'Schedule a Move',
+  },
+  {
+    url: '/rental',
+    text: 'Rent a Vehicle',
+  },
+  {
+    url: '/booking',
+    text: 'Book an Event',
+  },
+]
 
 export default function Home() {
   return (
@@ -21,14 +33,19 @@ export default function Home() {
           <div className={'bg-white rounded shadow p-4 z-10'}>
             Let Us Help Your On Your Journey
           </div>
+
         </div>
-        <div className={'flex'}>
-          <div className={'flex-1 m-4 p-4 shadow-lg rounded border border-gray-200'}>
-            <h1 className={'text-center text-xl '}>Schedule A Move</h1>
-          </div>
-          <div className={'flex-1 m-4 p-4 shadow-lg rounded border border-gray-200'}>
-            <h1 className={'text-center text-xl'}>Rent a Vehicle</h1>
-          </div>
+        <div className={'flex justify-center items-center flex-wrap mt-6'}>
+          { links.map(link =>
+            <Link
+            href={link.url}
+            key={link.url}
+            className={'min-w-[400px] max-w-[600px] flex-1 m-4 p-4 shadow rounded border border-gray-300 hover:border-gray-500 hover:shadow-2xl'}
+            >
+            <h2 className={'text-center text-xl '}>{link.text}</h2>
+            </Link>
+          )}
+
         </div>
       </main>
     </>
