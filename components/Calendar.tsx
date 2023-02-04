@@ -20,7 +20,7 @@ interface Props {
 const Calendar = ({dates, setDates, onClose, range = false} : Props) => {
   const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs())
   const currentDate = dayjs();
-  const nights = dates.endDate && dates.startDate ? dates.endDate.diff(dates.startDate, 'day') : null;
+  //const nights = dates.endDate && dates.startDate ? dates.endDate.diff(dates.startDate, 'day') : null;
 
   const handleLeftButton = () => {
     setSelectedDate(state => state.subtract(1, "month"));
@@ -111,7 +111,7 @@ const Calendar = ({dates, setDates, onClose, range = false} : Props) => {
     if(dates.startDate && day.isSame(dates.startDate, 'day') || dates.endDate && day.isSame(dates.endDate, 'day')) {
       const style = day.isSame(dates.startDate, 'day') ? 'right-0' : 'left-0';
       return (
-        <div className={'relative m-1'}>
+        <div className={'relative p-1'}>
           {dates.startDate && dates.endDate && <div className={`absolute ${style} bg-gray-100 w-1/2 h-full top-0`}/>}
           <button
             onClick={() => handleDateClick(day)}
@@ -122,7 +122,7 @@ const Calendar = ({dates, setDates, onClose, range = false} : Props) => {
       )
     } else if(dates.startDate && dates.endDate && day.isBetween(dates.startDate,dates.endDate, 'day')) {
       return (
-        <div className={'bg-gray-100 m-1'}>
+        <div className={'bg-gray-100 p-1'}>
           <button
             onClick={() => handleDateClick(day)}
             className={`aspect-square rounded-full max-w-full max-h-full w-full h-full  flex p-2  justify-center items-center border border-gray-100 hover:border-gray-300 hover:cursor-pointer`}>
@@ -132,7 +132,7 @@ const Calendar = ({dates, setDates, onClose, range = false} : Props) => {
       )
     }
     return (
-      <div className={'m-1'}>
+      <div className={'p-1'}>
         <button
           onClick={() => handleDateClick(day)}
           // Disallow selecting an end date before the start date if range of dates
@@ -148,18 +148,28 @@ const Calendar = ({dates, setDates, onClose, range = false} : Props) => {
   return (
     <>
 
-      <div className={'relative'}>
-        {dates.startDate && dates.endDate ?
-          <div>{dates.startDate.format('MMMM D, YYYY')} - {dates.endDate.format('MMMM D, YYYY')}</div> : null}
-        <div className={'flex justify-between my-4 absolute top-0 w-full px-12 xl:px-4'}>
+      <div className={'relative '}>
+        <div className={'px-12 text-lg font-bold'}>
+          { dates.startDate || dates.endDate ?
+            <span>
+              { dates.startDate ?
+                dates.startDate.format('MMMM D, YYYY') : ''}
+              {dates.endDate ? ` - ${dates.endDate.format('MMMM D, YYYY')}` : ''
+              }
+            </span>
+            :
+            <span>&nbsp;</span>
+          }
+        </div>
+        <div className={'flex justify-between mt-10 absolute top-0 w-full px-12 xl:px-4'}>
           <button className={'disabled:opacity-20'} onClick={handleLeftButton} disabled={selectedDate.month() === currentDate.month() && selectedDate.year() === currentDate.year()}><FiChevronLeft className={'w-6 h-6'}/></button>
           <button onClick={handleRightButton}><FiChevronRight className={'w-6 h-6'} /></button>
         </div>
         <div className={'flex justify-center lg:justify-between top-0'}>
-          <div className={'w-full xl:mr-16'}>
+          <div className={'w-full md:mr-16'}>
             {renderCalendar(selectedDate)}
           </div>
-          <div className={'hidden xl:block w-full'}>
+          <div className={'hidden md:block w-full'}>
             {renderCalendar(selectedDate.add(1, "month"))}
           </div>
         </div>
