@@ -31,7 +31,7 @@ export default function Home() {
         <div className={'h-[400px] relative flex items-center justify-center'}>
           <Image className={'absolute top-0 left-0 object-cover w-full h-full'} src={bannerImage} alt={'Road'}/>
           <div className={'bg-white/80 bg-white rounded shadow p-4 z-10 md:text-2xl text-xl'}>
-            No Matter You Destination, Your Next Journey Begins Here
+            No Matter Your Destination, Your Next Journey Begins Here
           </div>
 
         </div>
