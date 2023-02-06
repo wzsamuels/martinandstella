@@ -30,8 +30,8 @@ export default function Home() {
       <main>
         <div className={'h-[400px] relative flex items-center justify-center'}>
           <Image className={'absolute top-0 left-0 object-cover w-full h-full'} src={bannerImage} alt={'Road'}/>
-          <div className={'bg-white rounded shadow p-4 z-10'}>
-            Let Us Help Your On Your Journey
+          <div className={'bg-white/80 bg-white rounded shadow p-4 z-10 md:text-2xl text-xl'}>
+            No Matter You Destination, Your Next Journey Begins Here
           </div>
 
         </div>

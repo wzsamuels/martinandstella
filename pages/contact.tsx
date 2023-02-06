@@ -1,6 +1,7 @@
 import {FormEvent, useState} from "react";
 import useFormData from "../hooks/useFormData";
 import emailForm from "../lib/emailForm"
+import Form from "../components/Form";
 
 const formFields = [
   {
@@ -31,7 +32,7 @@ const Contact = () => {
     event.preventDefault();
     console.log(formData)
     try {
-      emailForm("contact@twinsilverdesign.com", "Email Form Test", formData)
+      emailForm("contact@twinsilverdesign.com", "Martin & Stella - Customer Contact Email", formData)
       setMessage("Thanks for your feedback! We'll quickly responded to any questions or concerns.")
     } catch(err) {
       setMessage("Sorry, we ran into a problem processing your request. Please contact us with the email address or phone number below.")
@@ -40,33 +41,8 @@ const Contact = () => {
 
   return (
     <div className={'flex flex-col items-center mt-4'}>
-      <h1>Contact Us</h1>
-      <form onSubmit={handleSubmit} className={'w-full max-w-md p-2'}>
-        {formFields.map(field =>
-          <div key={field.name} className={'flex items-center flex-wrap my-4'}>
-            <label className={'basis-[220px] shrink-0'}>{field.label}</label>
-            {field.type === "textarea" ?
-              <textarea
-                name={field.name}
-                value={formData[field.name]}
-                onChange={handleChange}
-                className={'p-1 m-2 border border-black flex-grow'}
-              />
-              :
-              <input
-                name={field.name}
-                value={formData[field.name]}
-                type={field.type}
-                onChange={handleChange}
-                className={'p-1 m-2 border-b border-black flex-grow'}
-              />
-            }
-          </div>
-        )}
-        <div className={'w-full flex justify-center my-4'}>
-          <button className={'border border-black bg-lightGreen rounded-xl py-1 px-3'} type={"submit"}>Submit</button>
-        </div>
-      </form>
+      <h1 className={'md:text-4xl text-3xl my-6'}>We&apos;d Love to Hear From You!</h1>
+      <Form handleSubmit={handleSubmit} className={'w-full max-w-md p-4 rounded-xl shadow-lg'} formFields={formFields}/>
     </div>
 
   )

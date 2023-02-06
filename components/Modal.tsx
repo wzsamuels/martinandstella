@@ -42,13 +42,13 @@ const Modal = ({show, onClose, children, title, className, background = true} : 
           <div className="fixed inset-0 flex min-h-full items-center justify-center p-4" style={{overflow: "initial"}}>
             {/* The actual dialog panel  */}
             <Dialog.Panel className={`mx-auto w-full max-h-full rounded bg-white flex flex-col ${className}`}>
-              <Dialog.Title className={'flex w-full justify-between sticky top-0 bg-white p-4 text-2xl relative'}>
+              <Dialog.Title className={'flex w-full justify-center sticky top-0 bg-white p-4 text-2xl relative text-center'}>
                 {title}
-                <button className={'rounded-full p-1 hover:bg-gray-100 absolute right-2 top-2'} onClick={onClose}>
+                <button className={'rounded-full p-1 hover:bg-gray-100 absolute right-4 top-4'} onClick={onClose}>
                   <IoMdClose/>
                 </button>
               </Dialog.Title>
-              <div className={'overflow-y-auto p-4'}>
+              <div className={'overflow-y-auto'}>
                 {children}
               </div>
             </Dialog.Panel>
