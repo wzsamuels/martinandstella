@@ -1,7 +1,7 @@
 import {FormEvent, useState} from "react";
-import useFormData from "../hooks/useFormData";
 import emailForm from "../lib/emailForm"
 import Form from "../components/Form";
+import { FormData } from "../types/formTypes";
 
 const formFields = [
   {
@@ -25,14 +25,12 @@ const formFields = [
 ]
 
 const Contact = () => {
-  const [formData, handleChange] = useFormData(formFields);
   const [message, setMessage] = useState("")
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>, formData: FormData) => {
     event.preventDefault();
-    console.log(formData)
     try {
-      emailForm("contact@twinsilverdesign.com", "Martin & Stella - Customer Contact Email", formData)
+      emailForm("Martin & Stella - Customer Contact Email", formData)
       setMessage("Thanks for your feedback! We'll quickly responded to any questions or concerns.")
     } catch(err) {
       setMessage("Sorry, we ran into a problem processing your request. Please contact us with the email address or phone number below.")
@@ -42,12 +40,18 @@ const Contact = () => {
   return (
     <div className={'flex flex-col items-center mt-4'}>
       <h1 className={'md:text-4xl text-3xl my-6'}>We&apos;d Love to Hear From You!</h1>
-      <Form handleSubmit={handleSubmit} className={'w-full max-w-md p-4 rounded-xl shadow-lg'} formFields={formFields}/>
+      <div className={'w-full max-w-md p-4 rounded-xl shadow-lg'}>
+        { message ?
+          <div className={'text-xl md:text-2xl'}>
+            { message }
+          </div>
+          :
+          <Form handleSubmit={handleSubmit} formFields={formFields}/>
+        }
+      </div>
     </div>
 
   )
 }
-
-
 
 export default Contact

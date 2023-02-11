@@ -1,13 +1,13 @@
-import Calendar, {Dates} from "../components/Calendar";
+import Modal from "../components/Modal";
 import {FormEvent, useState} from "react";
 import elantra from "../public/images/elantra.jpg"
 import fusion from "../public/images/fusion.jpg"
 import fiesta from "../public/images/fiesta.jpg"
 import Image from "next/image";
 import Button from "../components/Button";
-import Modal from "../components/Modal";
-import useFormData from "../hooks/useFormData";
+import { FormData } from "../types/formTypes"
 import emailForm from "../lib/emailForm";
+import Form from "../components/Form";
 
 const carData = [
   {
@@ -79,16 +79,13 @@ const formFields = [
 ]
 
 const Rental = () => {
-  const [formState, handleFormChange] = useFormData(formFields);
   const [modalOpen, setModalOpen] = useState(false);
-  const [dates, setDates] = useState<Dates>({startDate: null, endDate: null})
   const [message, setMessage] = useState("")
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>, formData: FormData) => {
     event.preventDefault();
-    console.log(formState)
     try {
-      emailForm("contact@twinsilverdesign.com", "Martin & Stella - Car Rental Reservation", formState)
+      emailForm("Martin & Stella - Car Rental Reservation", formData)
       setMessage("Thanks for making a car rental reservation with us! We'll respond shorty to confirm you reservation!")
     } catch(err) {
       setMessage("Sorry, we ran into a problem processing your request. Please contact us with the email address or phone number below.")
@@ -133,34 +130,7 @@ const Rental = () => {
           {message}
         </div>
         :
-        <form onSubmit={handleSubmit}>
-          { formFields.map(field =>
-            <div key={field.name} className={'flex items-center  flex-wrap my-4'}>
-              <label className={'basis-[220px] shrink-0'}>{field.label}</label>
-              {field.type === "textarea" ?
-                <textarea
-                  name={field.name}
-                  value={formState[field.name]}
-                  onChange={handleFormChange}
-                  required={field.required}
-                  className={'p-1 m-2 border border-black flex-grow'}
-                />
-                :
-                <input
-                  name={field.name}
-                  value={formState[field.name]}
-                  type={field.type}
-                  required={field.required}
-                  onChange={handleFormChange}
-                  className={'p-1 m-2 border-b border-black flex-grow'}
-                />
-              }
-            </div>
-          )}
-          <div className={'flex justify-center'}>
-            <Button type={'submit'}>Submit</Button>
-          </div>
-        </form>
+        <Form formFields={formFields} handleSubmit={handleSubmit}/>
       }
       </div>
     </Modal>

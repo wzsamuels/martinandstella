@@ -5,11 +5,9 @@ import event4 from "../public/images/event4.jpg"
 import event5 from "../public/images/event5.jpg"
 import event6 from "../public/images/event6.jpg"
 import Image from "next/image";
-import Button from "../components/Button";
 import {FormEvent, useState} from "react";
 import emailForm from "../lib/emailForm";
 import {FormData} from "../types/formTypes";
-import useFormData from "../hooks/useFormData";
 import Form from "../components/Form";
 
 const images = [
@@ -50,7 +48,7 @@ const Booking = () => {
     event.preventDefault();
     console.log(formData)
     try {
-      emailForm("contact@twinsilverdesign.com", "Martin & Stella - Event Booking", formData)
+      emailForm( "Martin & Stella - Event Booking", formData)
       setMessage("Thanks for making an event booking with us! We'll respond shorty to confirm you reservation!")
     } catch(err) {
       setMessage("Sorry, we ran into a problem processing your request. Please contact us with the email address or phone number below.")
