@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Image from "next/image";
-import logo from '../public/images/logo-cropped.png'
+import logo from '../public/images/logo-cropped-no-background.png'
 import Link from "next/link";
 import {IoMenuSharp} from "react-icons/io5";
 import {useState} from "react";
@@ -43,7 +43,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin={"true"}/>
-            <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet"/>
+
       </Head>
       <nav className={'relative'}>
         <div className={'h-[75px] bg-lightGreen flex items-center shadow justify-end '}>
