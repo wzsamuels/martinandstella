@@ -3,6 +3,8 @@ import {FormEvent, useState} from "react";
 import elantra from "../public/images/elantra.jpg"
 import fusion from "../public/images/fusion.jpg"
 import fiesta from "../public/images/fiesta.jpg"
+import focus from "../public/images/fordfocus.webp"
+
 import Image from "next/image";
 import Button from "../components/Button";
 import { FormData } from "../types/formTypes"
@@ -48,6 +50,19 @@ const carData = [
     city: 29,
     price: 200,
     image: fiesta,
+  },
+  {
+    id: 3,
+    drive: "Front-Wheel Drive",
+    fuel: "Regular Unleaded",
+    make: "Ford",
+    model: "Focus SE",
+    seats: 5,
+    year: 2008 ,
+    highway: 35,
+    city: 24,
+    price: 200,
+    image: focus,
   },
 ]
 
