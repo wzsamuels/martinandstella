@@ -9,6 +9,10 @@ import Head from "next/head";
 
 const links = [
   {
+    text: "Home",
+    url: "/"
+  },
+  {
     text: "Moving",
     url: "/moving"
   },
