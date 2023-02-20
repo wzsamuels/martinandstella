@@ -109,7 +109,7 @@ const Rental = () => {
 
   return (
     <div className={'flex flex-col items-center my-4'}>
-      <h1 className={'text-3xl my-6'}>Car Rental</h1>
+      <h1 className={'text-3xl my-6'}>Vehicle Rental</h1>
       <div className={'flex flex-wrap justify-center'}>
         { carData.map(car =>
           <div key={car.id} className={'rounded-t-xl shadow-xl border-gray-300 border max-w-[600px] m-4'}>
