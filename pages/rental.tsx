@@ -1,70 +1,12 @@
 import Modal from "../components/Modal";
 import {FormEvent, useState} from "react";
-import elantra from "../public/images/elantra.jpg"
-import fusion from "../public/images/fusion.jpg"
-import fiesta from "../public/images/fiesta.jpg"
-import focus from "../public/images/fordfocus.webp"
 
 import Image from "next/image";
 import Button from "../components/Button";
 import { FormData } from "../types/formTypes"
 import emailForm from "../lib/emailForm";
 import Form from "../components/Form";
-
-const carData = [
-  {
-    id: 0,
-    drive: "Front-Wheel Drive",
-    fuel: "Regular Unleaded",
-    make: "Hyundai",
-    model: "Elantra",
-    seats: 5,
-    year: 2005 ,
-    highway: 30,
-    city: 24,
-    price: 200,
-    image: elantra,
-  },
-  {
-    id: 1,
-    drive: "Front-Wheel Drive",
-    fuel: "Regular Unleaded",
-    make: "Ford",
-    model: "Fusion",
-    seats: 5,
-    year: 2012 ,
-    highway: 33,
-    city: 23,
-    price: 200,
-    image: fusion,
-  },
-  {
-    id: 2,
-    drive: "Front-Wheel Drive",
-    fuel: "Regular Unleaded",
-    make: "Ford",
-    model: "Fiesta",
-    seats: 5,
-    year: 2012 ,
-    highway: 39,
-    city: 29,
-    price: 200,
-    image: fiesta,
-  },
-  {
-    id: 3,
-    drive: "Front-Wheel Drive",
-    fuel: "Regular Unleaded",
-    make: "Ford",
-    model: "Focus SE",
-    seats: 5,
-    year: 2008 ,
-    highway: 35,
-    city: 24,
-    price: 200,
-    image: focus,
-  },
-]
+import carData from "../data/carData";
 
 const formFields = [
   {
