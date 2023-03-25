@@ -33,6 +33,9 @@ const Form = ({formFields, handleSubmit, className} : Props) => {
               value={formData[field.name]}
               type={field.type}
               required={field.required}
+              min={0}
+              minLength={field.minLength}
+              maxLength={field.maxLength}
               onChange={handleFormChange}
               className={'p-1 m-2 border-b border-black flex-grow'}
             />
