@@ -1,12 +1,13 @@
 import Modal from "../components/Modal";
-import {FormEvent, useState} from "react";
-
+import {FormEvent, useEffect, useState} from "react";
+import Form from "../components/Form";
+import { getStripe } from '../utils/stripe-client';
 import Image from "next/image";
 import Button from "../components/Button";
 import { FormData } from "../types/formTypes"
-import emailForm from "../lib/emailForm";
-import Form from "../components/Form";
 import carData from "../data/carData";
+import emailForm from "../lib/emailForm";
+
 
 const formFields = [
   {
@@ -33,19 +34,64 @@ const formFields = [
     label: 'Date',
     required: true,
   },
+  {
+    name: 'payment',
+    type: 'number',
+    label: 'Payment',
+    required: true
+  }
 ]
 
-const Rental = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [message, setMessage] = useState("")
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>, formData: FormData) => {
+
+const Rental = () => {
+  const [showRentalModal, setShowRentalModal] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+    if (query.get('success')) {
+      setShowPaymentModal(true);
+      setMessage('Order placed! You will receive an email confirmation.');
+    }
+
+    if (query.get('canceled')) {
+      setShowPaymentModal(true);
+      setMessage('Order canceled -- continue to shop around and checkout when you’re ready.');
+    }
+  }, []);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>, formData: FormData) => {
     event.preventDefault();
     try {
+      console.log('posting');
+
+      const res: Response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+        credentials: 'same-origin',
+        body: JSON.stringify({price: formData.payment})
+      });
+
+      if (!res.ok) {
+        console.log('Error in postData');
+        throw Error(res.statusText);
+      }
+
+      const { sessionId } = await res.json();
+      console.log(sessionId)
+
       emailForm("Martin & Stella - Car Rental Reservation", formData)
-      setMessage("Thanks for making a car rental reservation with us! We'll respond shorty to confirm you reservation!")
+      const stripe = await getStripe();
+      stripe?.redirectToCheckout({ sessionId });
+      //setLoading(false)
+
+      //setMessage("Thanks for making a car rental reservation with us! We'll respond shorty to confirm you reservation!")
+      setMessage("Taking you to the payment page...");
     } catch(err) {
-      setMessage("Sorry, we ran into a problem processing your request. Please contact us with the email address or phone number below.")
+      setMessage(`Sorry, we ran into a problem processing your request. Please contact us with the email address or phone number below. Error details: ${err}`)
     }
   }
 
@@ -68,29 +114,40 @@ const Rental = () => {
               </ul>
               <p>All vehicles are cleaned to perfection and come with a full tank of gas. </p>
               <div className={'flex justify-center my-4'}>
-                <Button onClick={() => setModalOpen(true)}>Make Reservation</Button>
+                <Button onClick={() => setShowRentalModal(true)}>Make Reservation</Button>
               </div>
 
             </div>
           </div>
         )}
       </div>
-    <Modal
-      show={modalOpen}
-      onClose={() => setModalOpen(false)}
-      title={'Make a Reservation'}
-      className={'max-w-lg'}
-    >
-      <div className={'px-4 pb-4'}>
-      { message ?
-        <div>
+      <Modal
+        show={showRentalModal}
+        onClose={() => {setShowRentalModal(false); setMessage("");}}
+        title={'Make a Reservation'}
+        className={'max-w-lg'}
+      >
+        <div className={'px-4 pb-4'}>
+        { message ?
+          <div>
+            {message}
+          </div>
+          :
+          <Form formFields={formFields} handleSubmit={handleSubmit}/>
+        }
+        </div>
+      </Modal>
+
+      <Modal
+        show={showPaymentModal}
+        onClose={() => { setShowPaymentModal(false);  setMessage("");}}
+        title={'Payment Results'}
+        className={'max-w-lg '}
+      >
+        <div className={'px-4 pb-4'}>
           {message}
         </div>
-        :
-        <Form formFields={formFields} handleSubmit={handleSubmit}/>
-      }
-      </div>
-    </Modal>
+      </Modal>
     </div>
   )
 }
