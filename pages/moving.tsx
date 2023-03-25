@@ -98,7 +98,7 @@ const Moving = () => {
           <div className={'absolute bg-black/20 z-10 w-full h-full mb-6'}></div>
           <Image className={'w-full max-w-4xl  w-full rounded'} src={moving1} alt={''}/>
         </div>
-        <div className={'z-10 absolute top-0 flex flex-col items-center max-[500px]:-translate-y-1/4 max-[550px]:h-screen justify-center'}>
+        <div className={'z-10 absolute top-0 flex flex-col justify-center items-center max-[550px]:h-[95%] justify-center'}>
           <div className={'px-4 py-2 m-4 bg-white/80 rounded-xl '}>
             <h1 className={'md:text-4xl text-3xl my-6 text-center'}>Feeling Crushed by the Stress of Moving?</h1>
             <h2 className={'md:text-3xl text-2xl my-4 text-center'}>Let Us Take Some of the Weight Off!</h2>
