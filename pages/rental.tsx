@@ -7,6 +7,7 @@ import Button from "../components/Button";
 import { FormData } from "../types/formTypes"
 import carData from "../data/carData";
 import emailForm from "../lib/emailForm";
+import { useRouter } from 'next/router'
 
 
 const formFields = [
@@ -27,6 +28,7 @@ const formFields = [
     type: 'tel',
     label: 'Phone',
     required: true,
+    maxLength:14
   },
   {
     name: 'date',
@@ -35,7 +37,7 @@ const formFields = [
     required: true,
   },
   {
-    name: 'payment',
+    name: 'price',
     type: 'number',
     label: 'Payment',
     required: true
@@ -47,21 +49,27 @@ const formFields = [
 const Rental = () => {
   const [showRentalModal, setShowRentalModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [carSelection, setCarSelection] = useState("");
   const [message, setMessage] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
+    console.log(query)
     if (query.get('success')) {
       setShowPaymentModal(true);
-      setMessage('Order placed! You will receive an email confirmation.');
+      emailForm("Martin & Stella - Car Rental Reservation", {name: query.get('name'), phone: query.get('phone'), email: query.get('email'), date: query.get('date'), car: query.get('car')})
+      setMessage('Thanks for making a car rental reservation with us! We\'ll respond shorty to confirm you reservation!');
+      router.replace('/rental', undefined, { shallow: true });
     }
 
     if (query.get('canceled')) {
       setShowPaymentModal(true);
       setMessage('Order canceled -- continue to shop around and checkout when you’re ready.');
+     router.replace('/rental', undefined, { shallow: true });
     }
-  }, []);
+  }, [router]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>, formData: FormData) => {
     event.preventDefault();
@@ -72,7 +80,7 @@ const Rental = () => {
         method: 'POST',
         headers: new Headers({ 'Content-Type': 'application/json' }),
         credentials: 'same-origin',
-        body: JSON.stringify({price: formData.payment})
+        body: JSON.stringify({carSelection, ...formData})
       });
 
       if (!res.ok) {
@@ -83,7 +91,6 @@ const Rental = () => {
       const { sessionId } = await res.json();
       console.log(sessionId)
 
-      emailForm("Martin & Stella - Car Rental Reservation", formData)
       const stripe = await getStripe();
       stripe?.redirectToCheckout({ sessionId });
       //setLoading(false)
@@ -114,7 +121,7 @@ const Rental = () => {
               </ul>
               <p>All vehicles are cleaned to perfection and come with a full tank of gas. </p>
               <div className={'flex justify-center my-4'}>
-                <Button onClick={() => setShowRentalModal(true)}>Make Reservation</Button>
+                <Button onClick={() => { setShowRentalModal(true); setCarSelection(`${car.year}-${car.make}-${car.model}`);}}>Make Reservation</Button>
               </div>
 
             </div>
