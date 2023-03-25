@@ -1,4 +1,4 @@
-import {ChangeEvent, useEffect, useState} from "react";
+import {ChangeEvent, useState} from "react";
 
 interface Field {
   name: string,
@@ -32,10 +32,6 @@ const useFormData = (fields : Field[]) => {
     useState<{[index: string]: string}>(fields.reduce((previousValue, currentValue ) =>
       ({ ...previousValue, [currentValue.name]: ''}), {})
     )
-
-  useEffect(() => {
-    console.log(formData)
-  }, [formData])
 
   const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     setFormData((state) => {
