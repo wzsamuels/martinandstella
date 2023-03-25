@@ -3,6 +3,8 @@ export interface FormField {
   type: string
   label: string
   required: boolean
+  minLength?: number
+  maxLength?: number
 }
 
 export interface FormData {
