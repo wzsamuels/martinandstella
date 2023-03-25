@@ -114,10 +114,10 @@ export default function App({ Component, pageProps }: AppProps) {
         </div>
       </div>
 
-      <div className={'mb-16'}>
+      <div className={'mb-28'}>
         <Component {...pageProps} />
       </div>
-      <footer className={'absolute bottom-0 bg-green h-16 p-4 w-full flex justify-center items-center'}>
+      <footer className={'absolute bottom-0 bg-green h-auto p-4 w-full flex justify-center items-center'}>
         <div className={'font-bold'}>
           <a className={'underline'} href={'mailto:martinstellallc@gmail.com'}> martinstellallc@gmail.com </a> | <a className={'underline'} href={'tel:9196350595'}>919-635-0595</a> | Copyright Martin & Stella LLC | Web Site by <a className={'underline'} href={'https://twinsilverdesign.com'}>Twin Silver Design</a>
         </div>
