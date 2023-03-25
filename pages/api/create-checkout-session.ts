@@ -3,7 +3,7 @@ import { stripe } from '../../utils/stripe';
 
 const CreateCheckoutSession: NextApiHandler = async (req, res) => {
   if (req.method === 'POST') {
-    const { price } = req.body;
+    const { price , name, email, phone, date, carSelection} = req.body;
 
     try {
       const session = await stripe.checkout.sessions.create({
@@ -20,11 +20,11 @@ const CreateCheckoutSession: NextApiHandler = async (req, res) => {
           }
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/rental?success=true`,
+        success_url: `${req.headers.origin}/rental?success=true&name=${name}&email=${email}&phone=${phone}&date=${date}&car=${carSelection}`,
         cancel_url: `${req.headers.origin}/rental?canceled=true`,
       });
 
-      return res.status(200).json({ sessionId: session.id });
+      return res.status(200).json({ sessionId: session.id, ...req.body });
     } catch (err: any) {
       console.log(err);
       res
