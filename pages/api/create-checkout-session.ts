@@ -20,7 +20,7 @@ const CreateCheckoutSession: NextApiHandler = async (req, res) => {
           }
         ],
         mode: 'payment',
-        success_url: `${req.headers.origin}/rental?success=true&name=${name}&email=${email}&phone=${phone}&date=${date}&car=${carSelection}`,
+        success_url: `${req.headers.origin}/rental?success=true&name=${name}&email=${email}&phone=${phone}&date=${date}&car=${carSelection},&amount=${price}`,
         cancel_url: `${req.headers.origin}/rental?canceled=true`,
       });
 

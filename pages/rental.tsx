@@ -59,7 +59,7 @@ const Rental = () => {
     console.log(query)
     if (query.get('success')) {
       setShowPaymentModal(true);
-      emailForm("Martin & Stella - Car Rental Reservation", {name: query.get('name'), phone: query.get('phone'), email: query.get('email'), date: query.get('date'), car: query.get('car')})
+      emailForm("Martin & Stella - Car Rental Reservation", {name: query.get('name'), phone: query.get('phone'), email: query.get('email'), date: query.get('date'), car: query.get('car'), amount: query.get('amount')})
       setMessage('Thanks for making a car rental reservation with us! We\'ll respond shorty to confirm you reservation!');
       router.replace('/rental', undefined, { shallow: true });
     }
