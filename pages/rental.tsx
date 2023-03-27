@@ -39,7 +39,7 @@ const formFields = [
   {
     name: 'price',
     type: 'number',
-    label: 'Payment',
+    label: 'Payment Amount ($)',
     required: true
   }
 ]
