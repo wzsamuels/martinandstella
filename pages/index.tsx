@@ -102,7 +102,8 @@ export default function Home() {
         </div>
         */}
         <Image className={'max-w-2xl w-full'} src={dreamville_lineup_image} alt={'Dreamville Lineup'}/>
-        <section className={'flex flex-col  items-center mt-12 border-t border-t-gray-300 p-4 w-full max-w-2xl'}>
+        <small className={'my-4'}>Disclaimer: Martin & Stella is not directly affiliated with Dreamville Festival.</small>
+        <section className={'flex flex-col  items-center mt-6 border-t border-t-gray-300 p-4 w-full max-w-2xl'}>
           <h2 className={'my-6 text-3xl md:text-4xl text-center '}>Check Out Our Other Services</h2>
           <div className={'flex justify-center items-center flex-wrap'}>
             { links.map(link =>
