@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Image from "next/image";
-import logo from '../public/images/logo-cropped-no-background.png'
+import logo from '../public/images/logo/logo-cropped-no-background.png'
 import Link from "next/link";
 import {IoMenuSharp} from "react-icons/io5";
 import {useState} from "react";

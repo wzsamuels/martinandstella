@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import bannerImage from '../public/images/road.jpg'
+import bannerImage from '../public/images/index/road.jpg'
 import Link from "next/link";
 
 const links = [
@@ -33,6 +33,7 @@ export default function Home() {
           <div className={'bg-white/80 bg-white rounded shadow p-4 z-10 md:text-2xl text-xl'}>
             No Matter Your Destination, Your Next Journey Begins Here
           </div>
+
 
         </div>
         <div className={'flex justify-center items-center flex-wrap mt-6'}>

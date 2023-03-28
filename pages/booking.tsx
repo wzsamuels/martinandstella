@@ -1,9 +1,9 @@
-import event1 from "../public/images/event1.jpg"
-import event2 from "../public/images/event2.jpg"
-import event3 from "../public/images/event3.jpg"
-import event4 from "../public/images/event4.jpg"
-import event5 from "../public/images/event5.jpg"
-import event6 from "../public/images/event6.jpg"
+import event1 from "../public/images/event/event1.jpg"
+import event2 from "../public/images/event/event2.jpg"
+import event3 from "../public/images/event/event3.jpg"
+import event4 from "../public/images/event/event4.jpg"
+import event5 from "../public/images/event/event5.jpg"
+import event6 from "../public/images/event/event6.jpg"
 import Image from "next/image";
 import {FormEvent, useState} from "react";
 import emailForm from "../lib/emailForm";

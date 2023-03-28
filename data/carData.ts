@@ -1,10 +1,10 @@
-import elantra from "../public/images/elantra.jpg";
-import fusion from "../public/images/fusion.jpg";
-import fiesta from "../public/images/fiesta.jpg";
-import focus from "../public/images/fordfocus.webp";
-import sentra2008 from "../public/images/sentra2008.webp"
-import sentra2014 from "../public/images/sentra2014.webp"
-import sentra2015 from "../public/images/sentra2015.webp"
+import elantra from "../public/images/rental/elantra.jpg";
+import fusion from "../public/images/rental/fusion.jpg";
+import fiesta from "../public/images/rental/fiesta.jpg";
+import focus from "../public/images/rental/fordfocus.webp";
+import sentra2008 from "../public/images/rental/sentra2008.webp"
+import sentra2014 from "../public/images/rental/sentra2014.webp"
+import sentra2015 from "../public/images/rental/sentra2015.webp"
 
 const carData = [
   {

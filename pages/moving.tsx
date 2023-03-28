@@ -1,8 +1,8 @@
 import {FormEvent, useState} from "react";
 import Image from "next/image";
 import {FormData} from "../types/formTypes"
-import moving1 from '../public/images/moving.jpg'
-import moving2 from '../public/images/moving2.jpg'
+import moving1 from '../public/images/moving/moving.jpg'
+import moving2 from '../public/images/moving/moving2.jpg'
 import emailForm from "../lib/emailForm";
 import Form from "../components/Form";
 
