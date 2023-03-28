@@ -25,7 +25,8 @@ const Form = ({formFields, handleSubmit, className} : Props) => {
               value={formData[field.name]}
               onChange={handleFormChange}
               required={field.required}
-              className={'p-1 m-2 border border-black flex-grow'}
+              className={'p-1 m-2 border border-black flex-grow w-full text-black'}
+
             />
             :
             <input
@@ -34,13 +35,13 @@ const Form = ({formFields, handleSubmit, className} : Props) => {
               type={field.type}
               required={field.required}
               onChange={handleFormChange}
-              className={'p-1 m-2 border-b border-black flex-grow'}
+              className={'p-1 m-2 border-b border-black flex-grow text-black'}
             />
           }
         </div>
       )}
       <div className={'flex justify-center'}>
-        <Button type={'submit'}>Submit</Button>
+        <Button type={'submit'} className={'text-black'}>Submit</Button>
       </div>
     </form>
   )
