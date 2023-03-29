@@ -39,7 +39,7 @@ const formFields = [
     required: true,
   },
   {
-    name: 'feedback',
+    name: 'Ride Details',
     type: 'textarea',
     label: "Ride Details",
     required: true,
