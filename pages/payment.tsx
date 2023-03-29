@@ -4,6 +4,8 @@ import {useRouter} from "next/router";
 import emailForm from "../lib/emailForm";
 import {stripe} from "../utils/stripe";
 import Button from "../components/Button";
+import payment from '../public/images/payment/payment.jpg'
+import Image from "next/image";
 
 export async function getServerSideProps(ctx: { query: { session_id: string; }; }) {
   if(!ctx.query.session_id) {
@@ -74,15 +76,22 @@ const PaymentPage = ({customerName, amount} : {customerName: string, amount: num
   }
 
   return (
-    <div className={'flex flex-col items-center p-4'}>
+    <div className={'flex flex-col items-center'}>
       <h1 className={'my-6 text-3xl md:text-4xl'}>Make a Payment</h1>
-      <h2>Need to make a payment for one of our services? We now offer convenient online credit card payments. Click on the button below to access our secure payment portal.</h2>
-      <Button className={'my-4'} onClick={handlePayment}>Make Payment</Button>
-      { message &&
-        <div className={'p-4 my-6 border border-black rounded'}>
-          {message}
+      <div className={'flex flex-col sm:flex-row items-center p-0 sm:p-4'}>
+        <Image className={'max-w-2xl w-3/4 sm:w-1/2 flex-1 rounded'} src={payment} alt={''}/>
+        <div className={'flex-1 p-4'}>
+          <h2>Need to make a payment for one of our services? We now offer convenient online credit card payments. Click on the button below to access our secure payment portal.</h2>
+          <div className={'flex justify-center w-full'}>
+            <Button className={'my-4'} onClick={handlePayment}>Make Payment</Button>
+            { message &&
+              <div className={'p-4 my-6 border border-black rounded'}>
+                {message}
+              </div>
+            }
+          </div>
         </div>
-      }
+      </div>
     </div>
   )
 }
