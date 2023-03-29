@@ -25,6 +25,10 @@ const links = [
     url: "/booking"
   },
   {
+    text: "Make Payment",
+    url: "/payment"
+  },
+  {
     text: "Contact",
     url: "/contact"
   },
@@ -52,7 +56,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <nav className={'relative'}>
         <div className={'h-[75px] bg-lightGreen flex items-center shadow justify-end '}>
           <div className={' lg:right-[92px] relative  w-full w-[calc(100vw-230px)] md:w-[calc(100vw-183px)] lg:w-[calc(100vw-275px)]'}>
-            <div className={'hidden md:flex justify-center items-center'}>
+            <div className={'hidden md:flex justify-center items-center text-sm lg:text-base'}>
             { links.map((link, index) =>
               <Link
                 href={link.url}
