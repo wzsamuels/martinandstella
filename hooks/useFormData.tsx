@@ -1,33 +1,7 @@
 import {ChangeEvent, useState} from "react";
+import {FormField} from "../types/formTypes";
 
-interface Field {
-  name: string,
-  type: string,
-  label: string,
-  required: boolean,
-}
-
-// TODO
-
-/*
-const handleFormUpdate = (event, formState, setFormState) => {
-  const key = event.target.name
-  const type = event.target.type
-  let value = event.target.value
-
-  // Automatically add dashes as phone numbers are typed
-  if(type && type === 'tel') {
-    if(value.length === 3 && formState.phone.length === 2) {
-      value += '-'
-    } else if(value.length  === 7 && formState.phone.length === 6) {
-      value += '-'
-    }
-  }
-  setFormState({ ...formState, [key]: value })
-}
-*/
-
-const useFormData = (fields : Field[]) => {
+const useFormData = (fields : FormField[]) => {
   const [formData, setFormData] =
     useState<{[index: string]: string}>(fields.reduce((previousValue, currentValue ) =>
       ({ ...previousValue, [currentValue.name]: ''}), {})
@@ -35,7 +9,24 @@ const useFormData = (fields : Field[]) => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     setFormData((state) => {
-      return {...state, [event.target.name]: event.target.value }
+      let value = event.target.value;
+
+      if(event.target.type === 'tel') {
+        if(formData[event.target.name].length === 0) {
+          value = value.slice(0, -1) + '(' + value.slice(-1);
+        } else if(value.length === 4 && formData[event.target.name].length === 3) {
+          value += ') '
+        } else if(value.length === 5 && formData[event.target.name].length === 4) {
+          value = value.slice(0, -1) + ') ' + value.slice(-1);
+        } else if(value.length === 6 && formData[event.target.name].length === 5) {
+          value = value.slice(0, -1) + ' ' + value.slice(-1);
+        } else if(value.length  === 9 && formData[event.target.name].length === 8) {
+          value += '-'
+        } else if(value.length  === 10 && formData[event.target.name].length === 9) {
+          value = value.slice(0, -1) + '-' + value.slice(-1);
+        }
+      }
+      return {...state, [event.target.name]:value }
     })
   }
 

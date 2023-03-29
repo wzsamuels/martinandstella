@@ -1,12 +1,11 @@
 import Modal from "../components/Modal";
 import {FormEvent, useState} from "react";
-
+import Form from "../components/Form";
 import Image from "next/image";
 import Button from "../components/Button";
 import { FormData } from "../types/formTypes"
-import emailForm from "../lib/emailForm";
-import Form from "../components/Form";
 import carData from "../data/carData";
+import emailForm from "../lib/emailForm";
 
 const formFields = [
   {
@@ -26,6 +25,7 @@ const formFields = [
     type: 'tel',
     label: 'Phone',
     required: true,
+    maxLength:14
   },
   {
     name: 'date',
@@ -35,15 +35,17 @@ const formFields = [
   },
 ]
 
+
+
 const Rental = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [message, setMessage] = useState("")
+  const [showRentalModal, setShowRentalModal] = useState(false);
+  const [message, setMessage] = useState("");
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>, formData: FormData) => {
     event.preventDefault();
     try {
-      emailForm("Martin & Stella - Car Rental Reservation", formData)
-      setMessage("Thanks for making a car rental reservation with us! We'll respond shorty to confirm you reservation!")
+      emailForm("Martin & Stella - Vehicle Rental Email", formData)
+      setMessage("Thanks for scheduling your rental! We'll respond to confirm your reservation.")
     } catch(err) {
       setMessage("Sorry, we ran into a problem processing your request. Please contact us with the email address or phone number below.")
     }
@@ -68,29 +70,29 @@ const Rental = () => {
               </ul>
               <p>All vehicles are cleaned to perfection and come with a full tank of gas. </p>
               <div className={'flex justify-center my-4'}>
-                <Button onClick={() => setModalOpen(true)}>Make Reservation</Button>
+                <Button onClick={() => setShowRentalModal(true)}>Make Reservation</Button>
               </div>
 
             </div>
           </div>
         )}
       </div>
-    <Modal
-      show={modalOpen}
-      onClose={() => setModalOpen(false)}
-      title={'Make a Reservation'}
-      className={'max-w-lg'}
-    >
-      <div className={'px-4 pb-4'}>
-      { message ?
-        <div>
-          {message}
+      <Modal
+        show={showRentalModal}
+        onClose={() => {setShowRentalModal(false); setMessage("");}}
+        title={'Make a Reservation'}
+        className={'max-w-lg'}
+      >
+        <div className={'px-4 pb-4'}>
+        { message ?
+          <div>
+            {message}
+          </div>
+          :
+          <Form formFields={formFields} handleSubmit={handleSubmit}/>
+        }
         </div>
-        :
-        <Form formFields={formFields} handleSubmit={handleSubmit}/>
-      }
-      </div>
-    </Modal>
+      </Modal>
     </div>
   )
 }
