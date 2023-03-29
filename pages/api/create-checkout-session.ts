@@ -24,7 +24,7 @@ const CreateCheckoutSession: NextApiHandler = async (req, res) => {
             },
 
              */
-            price: 'price_1MpMLIHTr5IjMdUcB1lPMCBg',
+            price: process.env.STRIPE_PRODUCT_PRICE,
             quantity: 1,
           }
         ],
