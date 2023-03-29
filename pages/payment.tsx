@@ -82,7 +82,7 @@ const PaymentPage = ({customerName, amount} : {customerName: string, amount: num
         <Image className={'max-w-2xl w-3/4 sm:w-1/2 flex-1 rounded'} src={payment} alt={''}/>
         <div className={'flex-1 p-4'}>
           <h2>Need to make a payment for one of our services? We now offer convenient online credit card payments. Click on the button below to access our secure payment portal.</h2>
-          <div className={'flex justify-center w-full'}>
+          <div className={'flex justify-center items-center flex-col w-full'}>
             <Button className={'my-4'} onClick={handlePayment}>Make Payment</Button>
             { message &&
               <div className={'p-4 my-6 border border-black rounded'}>
