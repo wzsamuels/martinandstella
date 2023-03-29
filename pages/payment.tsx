@@ -37,12 +37,12 @@ const PaymentPage = ({customerName, amount} : {customerName: string, amount: num
     if (query.get('success') && query.get('session_id')) {
       setMessage(`Thanks for making your payment of $${amount.toFixed(2)}, ${customerName}!`);
       emailForm("Martin & Stella - Customer Payment Made", {name: customerName, amount: amount})
-      //router.replace('/payment', undefined, { shallow: true });
+      router.replace('/payment', undefined, { shallow: true });
     }
 
     if (query.get('canceled')) {
       setMessage('Payment canceled.');
-      //router.replace('/payment', undefined, { shallow: true });
+      router.replace('/payment', undefined, { shallow: true });
     }
   }, [amount, customerName, router]);
 
