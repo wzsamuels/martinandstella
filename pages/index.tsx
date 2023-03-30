@@ -74,7 +74,7 @@ export default function Home() {
             <h1 className={'text-4xl md:text-5xl leading-relaxed md:leading-relaxed my-4 text-center'}>
               Schedule Your Dreamville Festival Ride NOW!
             </h1>
-            <h2 className={'text-xl md:text-2xl text-center my-4'}>Give us a call/text at <a href={'tel:9196350595'} className={'underline'}>919-635-0595</a> or <a href={'tel:9196350595'} className={'underline'}>919-440-2579</a> with your information to book a ride or fill out the form below. Do to the high volume of calls we&apos;re expecting, please try the other number if the first is busy.</h2>
+            <h2 className={'text-xl md:text-2xl text-center my-4'}>Give us a call/text at <a href={'tel:9196350595'} className={'underline'}>919-635-0595</a> or <a href={'tel:9196350595'} className={'underline'}>919-440-2579</a> with your information to book a ride or fill out the form below. Due to the high volume of calls we&apos;re expecting, please try the other number if the first is busy.</h2>
             <div className={'w-full max-w-md p-4 '}>
               { message ?
                 <div className={'text-2xl md:text-3xl my-6 text-center border border-white p-4'}>
