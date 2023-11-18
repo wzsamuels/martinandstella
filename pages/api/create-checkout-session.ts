@@ -2,34 +2,18 @@ import { NextApiHandler } from 'next';
 import { stripe } from '../../utils/stripe';
 
 const CreateCheckoutSession: NextApiHandler = async (req, res) => {
-
-  if (req.method === 'GET') {
-
-  }
-
   if (req.method === 'POST') {
-    //const { price , name, email, phone, date, carSelection} = req.body;
-
     try {
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         billing_address_collection: 'required',
         line_items: [
           {
-            /*
-            price_data: {
-              currency: 'usd',
-              product: "prod_NaXQK2F7ihimAx",
-              unit_amount: price * 100
-            },
-
-             */
             price: process.env.STRIPE_PRODUCT_PRICE,
             quantity: 1,
           }
         ],
         mode: 'payment',
-        //success_url: `${req.headers.origin}/payment?success=true&name=${name}&email=${email}&phone=${phone}&date=${date}&car=${carSelection},&amount=${price}`,
         success_url: `${req.headers.origin}/payment?success=true&session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/payment?canceled=true`,
       });
