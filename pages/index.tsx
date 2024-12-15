@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import bannerImage from '../public/images/index/road.jpg'
+import badgeImage from '../public/images/index/localmovers_badge.png'
 import Link from "next/link";
 
 const links = [
@@ -46,7 +47,11 @@ export default function Home() {
               <h2 className={'text-center text-xl '}>{link.text}</h2>
             </Link>
           )}
-
+        </div>
+        <div className='flex justify-center items-center w-full '>
+          <Link href={'https://www.localmovers.com/movers-in-raleigh'} target="_blank" rel="noopener noreferrer">
+            <Image className={'h-[250px] w-[250px]'} src={badgeImage} alt="Local Movers Badge"/>
+          </Link>
         </div>
       </main>
     </>
